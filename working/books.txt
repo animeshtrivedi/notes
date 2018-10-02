@@ -1,0 +1,7 @@
+The Art of Multiprocessor Programming - Herlihy and Shavit
+https://www.e-reading.club/bookreader.php/134637/Herlihy,_Shavit_-_The_art_of_multiprocessor_programming.pdf
+
+Scala High Performance Programming - Theron and Diamant 
+http://pepa.holla.cz/wp-content/uploads/2016/08/Scala-High-Performance-Programming.pdf
+
+

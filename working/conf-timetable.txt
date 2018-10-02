@@ -1,0 +1,16 @@
+# Conference monnthly timetable
+# Due - Conferences
+# Uncategorized SIGMOD, VLDB
+
+	Jan - USENIX, HotOS, SIGCOMM
+	Feb - Systor
+	Mar - HotCloud, HotStorage
+	Apr - OSDI, SOSP, Apsys
+	May - NSDI (spring), SoCC
+	Jun - CoNEXT
+	Jul - ASPLOS, HotNets
+	Aug -
+	Sep - NSDI (autumn), EuroSys, FAST, SysML
+	Oct -
+	Nov -
+	Dec - ICDCS
