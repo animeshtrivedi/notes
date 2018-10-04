@@ -1,0 +1,68 @@
+SAND: Towards High-Performance Serverless Computing
+https://www.usenix.org/conference/atc18/presentation/akkus
+[4*]
+
+Key problem is that in serverless each function is executed in its
+independent container. This creates problem for :
+Concurrency: when (i) using a cold container that has a large
+start-up time; (ii) warm container that might consume resources.
+Interaction: there is no difference between a functions from
+a same application and inter-application functions. Every message,
+notification goes through the global message bus.
+
+They propose to to use two-level of isolation mechanism to
+differentiate between intra and inter-application functions.
+They use fork from a "worker" process for the first one to
+decrease the start-up latency (shared lib, pre-loaded code, etc).
+They can use containers, VMs, LightVM, unikernels, light-weight
+contexts, threads to provide this isolation. They also propose
+a two-level hierarchical bus to deliver local and global messages.
+
+Related work on serverless start-up time and isolation mechanisms,
+and what framework and languge these systems support.
+
+Follow up: what is the performance of Kafka and what message type
+patterns they have? Small and large message distribution? vs using
+a control bus overall. Microsecond-scale serverless service? in
+OpenWhisk or GreenGrass (these we can install and execute locally).
+------------------------------------------------------------------------------
+
+SOCK: Rapid Task Provisioning with Serverless-Optimized Containers
+https://www.usenix.org/conference/atc18/presentation/oakes
+[4*]
+
+Three advantages of serverless - programming at an high-abstraction level,
+reusing libraries, and decomposing applications into auto-scaling serverless
+lambdas. Specially with language runtimes and isolated lambda containers
+with lots of library loading make slow cold start a key problem. They do
+heavy benchmarking of Linux's isolation mechanisms - namely, container
+storage (AUFS and bind mounting, chroot and mount namespace), network
+isolation using namespaces (study lock overheads latencies using ftrace),
+and performance isolation using cgroups. Similarly authors study Python
+package management and loading time, and how many packages are shared.
+So, authors propose a special-purpose "isolation" mechanism aiming to provide
+(i) low-latency invocation for Python that import libraries because
+loading libraries is a costly operation and there are many of them;
+They built a cache using Andriod's Zygote mechanism.
+(ii) efficient sandbox initiailzation for high steady-state startup
+throughput using the best setting out of the study (drop generalization
+and focus on Python lambdas). They deploy SOCK in OpenLambda replacing
+docker containers.
+
+Related work on serverless platforms, applications, and mechanisms -
+library OSes, enclaves, and unikernels. Language start-up specific
+optimizations (Python, Java), caching and its security implications.
+
+Focus on Python-specific setting. How does it work for "analytics" worklaods?
+------------------------------------------------------------------------------
+
+Peeking Behind the Curtains of Serverless Platforms
+https://www.usenix.org/conference/atc18/presentation/wang-liang
+[]
+
+------------------------------------------------------------------------------
+
+KylinX: A Dynamic Library Operating System for Simplified and Efficient
+Cloud Virtualization
+https://www.usenix.org/conference/atc18/presentation/zhang-yiming
+[]
