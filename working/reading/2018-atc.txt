@@ -58,8 +58,52 @@ Focus on Python-specific setting. How does it work for "analytics" worklaods?
 
 Peeking Behind the Curtains of Serverless Platforms
 https://www.usenix.org/conference/atc18/presentation/wang-liang
-[]
+[2.5*]
 
+Here is a section by section summary:
+* 4.2 - VM identification - AWS has special instance root ID that can be
+used to identify the VM. In Azure, WEBSITE_INSTANCE_ID is used. Google
+they cannot identify.
+* 4.3 - Tenant isolation - "function instances, FI, (i.e. containers, etc)".
+In AWS each user gets its own set of VMs to run FIs. Azure shares a pool
+between all users.
+* 4.4 - Heterogeneous  infrastrucutre for all. AWS has 5-6 types, Azure
+more like 4K, Google authors cannot identify.
+* 5.1 - Scalability - talks about cocurrent executions
+up to 200 (AWS), 10 for Azure and GCP. More than these numbers are "queued".
+Why so low, I thought these FaaS can scale up to any number according to the
+demand. Or this is an artifact of their account and setup.
+* 5.1 - Instance placement - AWS optimized for memory and does bin-packing.
+In 4.1 they say that AWS uses C4.Large which has 3.75GB memory, which matches
+in 5.1 with the paper's reported memory limit (3.3GB). No solid info on Azure
+or Google.
+* 5.2 - Coldstart and VM provisioning - warmstart(AWS=25ms, Google=79ms,
+Azure=320ms). AWS, even in the cold start case, uses a pool of pre-boot
+VMs to optimize (instead of network fetching and booting from scratch).
+Function memory footprint and language runtime -> affect the coldstart time.
+But as the memory demand increases, AWS allocates proportional CPU power.
+* 5.3 - Instance lifetime - Just the trend that FI (containers) were kept alive
+after the function invocation has been finished. These FI can linger from
+30-40mins to ~10hours based on the cloud provider's policy.
+* 5.4 - Idle instance recyclying - ? (How is this different from 5.3). I
+suppose in the previous one there was repeated request going on for a given
+frequency. Here authors say that AWS has ~26-27mins of idle time. How is
+this differnet from Table 1, timeout row which says 300 seconds?
+* 6.1 - CPU utilization - AWS lambdas get more CPU utilization for more
+memory (lowest is around ~10%). What does this means? Is my application going
+to run slower by x% when running in low-memory configuration?
+* 6.2 - I/O and Network - expected drop in performance when co-residency
+increases, but unfair distribution of drop. These measurements are for low-end
+network and storage configurations. Google has the best isolation configuration.
+
+A lot of information is packed in this paper, a bit too dense and
+unstrucutred for my taste. There is no immediate ramifications of
+these insights? I usually like these investigation papers, but this
+one was too detailed without any concrete recommendations. Such
+performance heavy studies without any good insights/recommendation
+are bound to get obsolete in 3-6 months after issues reported are
+gradually fixed. But I have to sat pretty cool and comprehensive
+study and they managed to re-run the experiments too.
 ------------------------------------------------------------------------------
 
 KylinX: A Dynamic Library Operating System for Simplified and Efficient
