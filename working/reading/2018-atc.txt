@@ -109,4 +109,22 @@ study and they managed to re-run the experiments too.
 KylinX: A Dynamic Library Operating System for Simplified and Efficient
 Cloud Virtualization
 https://www.usenix.org/conference/atc18/presentation/zhang-yiming
-[]
+[?]
+
+I need to read it more carefully. The Table 1 essentially put the work in
+a prespective. Unikernels are static and this work makes them dynamic.
+
+Picoprocesses (Doucuer OSDI'08) - and their extensions with forking,
+and adding dynamic code. What is the difference between Picoprocess
+and Unikernels (ASPLOS).
+Read the Unikernel, Picoprocess, and all papers in Table 1 more carefuly.
+
+How this isolation and virtualization mechanisms useful for distributed
+systems that we are building today? What is the cost of these isolation
+mechanisms wrt to high-performance network and storage hardware?
+
+Contains related work about Unikernel appliances, reduced VMs, containers,
+and picoprocesses.
+------------------------------------------------------------------------------
+
+
